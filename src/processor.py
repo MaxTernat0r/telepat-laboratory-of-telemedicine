@@ -23,6 +23,7 @@ from chatgpt_client import ChatGPTClient
 import multiprocessing
 from rapidfuzz import fuzz, process
 from rapidfuzz.distance import Levenshtein
+import rotate_images
 
 # Путь к локальному poppler (Windows версия)
 POPPLER_PATH = Path(__file__).parent.parent / "side-modules" / "poppler-24.08.0" / "Library" / "bin"
@@ -385,9 +386,22 @@ class DocumentProcessor:
                     temp_files_for_predict.append(temp_file)
                     image.save(str(temp_file), 'JPEG', quality=95)
                     image.close()
-                # Проверяем все страницы через predict_image
+                # Если все страницы прошли, обрабатываем их
                 skip_pdf = False
                 for temp_file in temp_files_for_predict:
+                    # Сначала коррекция поворота для каждой страницы
+                    angle = rotate_images.correct_image_rotation(str(temp_file))
+                    if angle and angle != 0:
+                        image_cv = cv2.imread(str(temp_file))
+                        if image_cv is not None:
+                            if angle == 90:
+                                image_cv = cv2.rotate(image_cv, cv2.ROTATE_90_CLOCKWISE)
+                            elif angle == 180:
+                                image_cv = cv2.rotate(image_cv, cv2.ROTATE_180)
+                            elif angle == 270:
+                                image_cv = cv2.rotate(image_cv, cv2.ROTATE_90_COUNTERCLOCKWISE)
+                            cv2.imwrite(str(temp_file), image_cv)
+                    # Затем фильтрация
                     try:
                         pred = predict_image.predict_image(str(temp_file))
                         logger.info(f"predict_image для {temp_file}: {pred}")
@@ -416,7 +430,20 @@ class DocumentProcessor:
                 temp_files.append(temp_file)
                 with Image.open(file_path) as img:
                     img.save(str(temp_file), 'JPEG', quality=95)
-                # PREDICT_IMAGE фильтрация
+                # Сначала коррекция поворота
+                angle = rotate_images.correct_image_rotation(str(temp_file))
+                if angle and angle != 0:
+                    image_cv = cv2.imread(str(temp_file))
+                    if image_cv is not None:
+                        # Поворот по часовой стрелке на angle градусов
+                        if angle == 90:
+                            image_cv = cv2.rotate(image_cv, cv2.ROTATE_90_CLOCKWISE)
+                        elif angle == 180:
+                            image_cv = cv2.rotate(image_cv, cv2.ROTATE_180)
+                        elif angle == 270:
+                            image_cv = cv2.rotate(image_cv, cv2.ROTATE_90_COUNTERCLOCKWISE)
+                        cv2.imwrite(str(temp_file), image_cv)
+                # Затем фильтрация
                 sys.path.append(str(Path(__file__).parent))
                 try:
                     pred = predict_image.predict_image(str(temp_file))
@@ -500,12 +527,22 @@ class DocumentProcessor:
                     lines.append({'top': word['top'], 'words': [word]})
 
             sensitive_regions = []
-            # Сначала ищем группы с городами и точками/запятыми
+            # Сначала ищем группы с городами и точками/запятыми (fuzzy 10%)
             for line in lines:
                 words = line['words']
                 n = len(words)
                 for i, w in enumerate(words):
-                    if w['text'].strip().lower() in self.russian_cities:
+                    wtext = w['text'].strip().lower()
+                    # Учитываем слитные формы типа г.Москва, г-Самара, гМосква
+                    city_candidate = wtext
+                    # Удаляем приставки типа г., г-, г, г:
+                    for prefix in ['г.', 'г-', 'г,', 'г:', 'г ']:
+                        if city_candidate.startswith(prefix):
+                            city_candidate = city_candidate[len(prefix):].strip()
+                    if city_candidate.startswith('г') and len(city_candidate) > 1 and not city_candidate[1].isalpha():
+                        city_candidate = city_candidate[1:].strip()
+                    is_city = any(Levenshtein.normalized_distance(city_candidate, city) <= 0.10 for city in self.russian_cities)
+                    if is_city:
                         # Ищем границы группы слева
                         left = i
                         while left > 0 and words[left-1]['text'].strip() in {'.', ','}:
@@ -527,6 +564,7 @@ class DocumentProcessor:
                                 'type': 'city_group',
                                 'text': words[j]['text']
                             })
+                # ... остальная логика (города, имена, числа и т.д.) ...
             # Теперь обычная логика для остальных слов, но не маскируем то, что уже замаскировано
             already_masked = set((r['left'], r['top'], r['width'], r['height']) for r in sensitive_regions)
             for word_data in text_data:
@@ -534,6 +572,9 @@ class DocumentProcessor:
                 word_lower = word_text.lower()
                 key = (word_data['left'], word_data['top'], word_data['width'], word_data['height'])
                 if key in already_masked:
+                    continue
+                # Не маскируем слова длиной 1 символ
+                if len(word_text) < 2:
                     continue
                 # Маскируем имена и отчества (fuzzy)
                 if self._is_fuzzy_match(word_lower, self.russian_names) or self._is_fuzzy_match(word_lower, self.russian_patronymics):

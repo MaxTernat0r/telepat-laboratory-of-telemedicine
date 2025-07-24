@@ -46,7 +46,7 @@ async def process_documents() -> None:
 
     # Получаем список всех файлов в директории
     input_files = [f for f in input_dir.iterdir() if
-                   f.suffix.lower() in ('.png', '.jpg', '.jpeg', '.tiff', '.bmp')]#, '.pdf')]
+                   f.suffix.lower() in ('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.pdf')]
 
     if not input_files:
         logger.warning("В директории input не найдено изображений")
