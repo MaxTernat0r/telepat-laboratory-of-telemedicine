@@ -24,6 +24,7 @@ import multiprocessing
 from rapidfuzz import fuzz, process
 from rapidfuzz.distance import Levenshtein
 import rotate_images
+import phonenumbers
 
 # Путь к локальному poppler (Windows версия)
 POPPLER_PATH = Path(__file__).parent.parent / "side-modules" / "poppler-24.08.0" / "Library" / "bin"
@@ -576,6 +577,21 @@ class DocumentProcessor:
                 # Не маскируем слова длиной 1 символ
                 if len(word_text) < 2:
                     continue
+                # Маскируем номера телефонов через phonenumbers
+                try:
+                    z = phonenumbers.parse(word_text, 'RU')
+                    if phonenumbers.is_valid_number(z):
+                        sensitive_regions.append({
+                            'left': word_data['left'],
+                            'top': word_data['top'],
+                            'width': word_data['width'],
+                            'height': word_data['height'],
+                            'type': 'phone',
+                            'text': word_text
+                        })
+                        continue
+                except Exception:
+                    pass
                 # Маскируем имена и отчества (fuzzy)
                 if self._is_fuzzy_match(word_lower, self.russian_names) or self._is_fuzzy_match(word_lower, self.russian_patronymics):
                     sensitive_regions.append({
