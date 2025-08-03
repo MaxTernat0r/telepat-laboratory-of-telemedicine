@@ -1,0 +1,185 @@
+digraph G {
+    graph [rankdir=TB, clusterrank="local"];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        chatgpt_client [label="chatgpt_client", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        deepseek_client [label="deepseek_client", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1"];
+        gigachat_client [label="gigachat_client", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2"];
+        main [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="3"];
+        names_cito_list [label="names_cito_list", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="4"];
+        predict_image [label="predict_image", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="5"];
+        processor [label="processor", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="6"];
+        rotate_images [label="rotate_images", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="7"];
+        train_model [label="train_model", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="8"];
+        utils [label="utils", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="9"];
+        
+        subgraph cluster_chatgpt_client__ChatGPTClient {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="chatgpt_client.ChatGPTClient"];
+            chatgpt_client__ChatGPTClient____aenter__ [label="__aenter__", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            chatgpt_client__ChatGPTClient____aexit__ [label="__aexit__", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            chatgpt_client__ChatGPTClient____init__ [label="__init__", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            chatgpt_client__ChatGPTClient___encode_image [label="_encode_image", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            chatgpt_client__ChatGPTClient___get_session [label="_get_session", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            chatgpt_client__ChatGPTClient__analyze_medical_report [label="analyze_medical_report", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            chatgpt_client__ChatGPTClient__analyze_multiple_medical_reports [label="analyze_multiple_medical_reports", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            chatgpt_client__ChatGPTClient__close [label="close", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_deepseek_client__DeepSeekClient {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="deepseek_client.DeepSeekClient"];
+            deepseek_client__DeepSeekClient____init__ [label="__init__", style="filled", fillcolor="#ffd099b2", fontcolor="#000000", group="1"];
+            deepseek_client__DeepSeekClient___check_api_availability [label="_check_api_availability", style="filled", fillcolor="#ffd099b2", fontcolor="#000000", group="1"];
+            deepseek_client__DeepSeekClient__analyze_medical_report [label="analyze_medical_report", style="filled", fillcolor="#ffd099b2", fontcolor="#000000", group="1"];
+            deepseek_client__DeepSeekClient__analyze_multiple_medical_reports [label="analyze_multiple_medical_reports", style="filled", fillcolor="#ffd099b2", fontcolor="#000000", group="1"];
+        }
+        subgraph cluster_gigachat_client__GigaChatClient {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="gigachat_client.GigaChatClient"];
+            gigachat_client__GigaChatClient____init__ [label="__init__", style="filled", fillcolor="#f5ff99b2", fontcolor="#000000", group="2"];
+            gigachat_client__GigaChatClient___get_access_token [label="_get_access_token", style="filled", fillcolor="#f5ff99b2", fontcolor="#000000", group="2"];
+            gigachat_client__GigaChatClient___remove_file [label="_remove_file", style="filled", fillcolor="#f5ff99b2", fontcolor="#000000", group="2"];
+            gigachat_client__GigaChatClient___upload_file [label="_upload_file", style="filled", fillcolor="#f5ff99b2", fontcolor="#000000", group="2"];
+            gigachat_client__GigaChatClient__analyze_medical_report [label="analyze_medical_report", style="filled", fillcolor="#f5ff99b2", fontcolor="#000000", group="2"];
+            gigachat_client__GigaChatClient__analyze_multiple_medical_reports [label="analyze_multiple_medical_reports", style="filled", fillcolor="#f5ff99b2", fontcolor="#000000", group="2"];
+        }
+        subgraph cluster_main {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="main"];
+            main__main [label="main", style="filled", fillcolor="#defeccb2", fontcolor="#000000", group="3"];
+            main__process_documents [label="process_documents", style="filled", fillcolor="#defeccb2", fontcolor="#000000", group="3"];
+            main__setup_logging [label="setup_logging", style="filled", fillcolor="#defeccb2", fontcolor="#000000", group="3"];
+        }
+        
+        subgraph cluster_processor__DocumentProcessor {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="processor.DocumentProcessor"];
+            processor__DocumentProcessor [label="DocumentProcessor", style="filled", fillcolor="#ccf1feb2", fontcolor="#000000", group="6"];
+            processor__transliterate [label="transliterate", style="filled", fillcolor="#ccf1feb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor____init__ [label="__init__", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___analyze_multiple_files [label="_analyze_multiple_files", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___cleanup_temp_files [label="_cleanup_temp_files", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___is_allowed_word [label="_is_allowed_word", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___is_numeric_personal_data [label="_is_numeric_personal_data", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___load_cities [label="_load_cities", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___load_medical_terms [label="_load_medical_terms", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___load_surnames [label="_load_surnames", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___process_single_page [label="_process_single_page", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor___recognize_text [label="_recognize_text", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor__create [label="create", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            processor__DocumentProcessor -> processor__DocumentProcessor__process_document [label="process_document", style="filled", fillcolor="#99e3ffb2", fontcolor="#000000", group="6"];
+            
+            subgraph cluster_medical_analysis_calls {
+                graph [style="filled,rounded",fillcolor="#80808018", label="medical_analysis_calls"];
+                deepseek_client__DeepSeekClient [label="DeepSeekClient", style="filled", fillcolor="#fee7ccb2", fontcolor="#000000"];
+                chatgpt_client__ChatGPTClient [label="ChatGPTClient", style="filled", fillcolor="#feccccb2", fontcolor="#000000"];
+                gigachat_client__GigaChatClient [label="GigaChatClient", style="filled", fillcolor="#fafeccb2", fontcolor="#000000"];
+            }
+            
+            subgraph cluster_get_poppler {
+                graph [style="filled,rounded",fillcolor="#80808018", label="get_poppler"];
+                utils__get_poppler_path [label="get_poppler_path", style="filled", fillcolor="#faccfeb2", fontcolor="#000000", group="9"];
+            }
+            subgraph cluster_predict_image {
+                graph [style="filled,rounded",fillcolor="#80808018", label="predict_image"];
+                predict_image__extract_features [label="extract_features", style="filled", fillcolor="#ccfef1b2", fontcolor="#000000", group="5"];
+                predict_image__predict_image [label="predict_image", style="filled", fillcolor="#ccfef1b2", fontcolor="#000000", group="5"];
+            }
+        }
+        subgraph cluster_rotate_images {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="rotate_images"];
+            rotate_images__correct_image_rotation [label="correct_image_rotation", style="filled", fillcolor="#ccd5feb2", fontcolor="#000000", group="7"];
+            rotate_images__main [label="main", style="filled", fillcolor="#ccd5feb2", fontcolor="#000000", group="7"];
+            rotate_images__worker [label="worker", style="filled", fillcolor="#ccd5feb2", fontcolor="#000000", group="7"];
+        }
+        subgraph cluster_train_model {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="train_model"];
+            train_model__extract_features [label="extract_features", style="filled", fillcolor="#deccfeb2", fontcolor="#000000", group="8"];
+        }
+        
+    }
+        chatgpt_client__ChatGPTClient__analyze_medical_report -> chatgpt_client__ChatGPTClient___get_session [style="solid", color="#000000"];
+        chatgpt_client__ChatGPTClient__analyze_medical_report -> chatgpt_client__ChatGPTClient___encode_image [style="solid", color="#000000"];
+        chatgpt_client__ChatGPTClient____aexit__ -> chatgpt_client__ChatGPTClient__close [style="solid", color="#000000"];
+        
+        chatgpt_client__ChatGPTClient__analyze_multiple_medical_reports -> chatgpt_client__ChatGPTClient___get_session [style="solid", color="#000000"];
+        chatgpt_client__ChatGPTClient__analyze_multiple_medical_reports -> chatgpt_client__ChatGPTClient___encode_image [style="solid", color="#000000"];
+        
+        deepseek_client__DeepSeekClient____init__ -> deepseek_client__DeepSeekClient___check_api_availability [style="solid", color="#000000"];
+        deepseek_client__DeepSeekClient__analyze_medical_report -> deepseek_client__DeepSeekClient___check_api_availability [style="solid", color="#000000"];
+        deepseek_client__DeepSeekClient__analyze_multiple_medical_reports -> deepseek_client__DeepSeekClient___check_api_availability [style="solid", color="#000000"];
+        
+        gigachat_client__GigaChatClient____init__ -> gigachat_client__GigaChatClient___get_access_token [style="solid", color="#000000"];
+        gigachat_client__GigaChatClient___upload_file -> gigachat_client__GigaChatClient___get_access_token [style="solid", color="#000000"];
+        gigachat_client__GigaChatClient___remove_file -> gigachat_client__GigaChatClient___get_access_token [style="solid", color="#000000"];
+        gigachat_client__GigaChatClient__analyze_medical_report -> gigachat_client__GigaChatClient___upload_file [style="solid", color="#000000"];
+        gigachat_client__GigaChatClient__analyze_medical_report -> gigachat_client__GigaChatClient___remove_file [style="solid", color="#000000"];
+        gigachat_client__GigaChatClient__analyze_medical_report -> gigachat_client__GigaChatClient___get_access_token [style="solid", color="#000000"];
+        
+        
+        gigachat_client__GigaChatClient__analyze_multiple_medical_reports -> gigachat_client__GigaChatClient___upload_file [style="solid", color="#000000"];
+        gigachat_client__GigaChatClient__analyze_multiple_medical_reports -> gigachat_client__GigaChatClient___remove_file [style="solid", color="#000000"];
+        gigachat_client__GigaChatClient__analyze_multiple_medical_reports -> gigachat_client__GigaChatClient___get_access_token [style="solid", color="#000000"];
+        
+        
+        #main -> chatgpt_client__ChatGPTClient [style="solid", color="#000000"];
+        #main -> gigachat_client__GigaChatClient [style="solid", color="#000000"];
+        main -> main__setup_logging [style="solid", color="#000000"];
+        main__process_documents -> processor__DocumentProcessor [style="solid", color="#000000"];
+        main -> main__main [style="solid", color="#000000"];
+        #main -> deepseek_client__DeepSeekClient [style="solid", color="#000000"];
+        #main__process_documents -> gigachat_client__GigaChatClient [style="solid", color="#000000"];
+        main__process_documents -> gigachat_client__GigaChatClient__analyze_medical_report [style="solid", color="#000000"];
+        main__process_documents -> gigachat_client__GigaChatClient____init__ [style="solid", color="#000000"];
+        #main__process_documents -> deepseek_client__DeepSeekClient [style="solid", color="#000000"];
+        main__process_documents -> deepseek_client__DeepSeekClient____init__ [style="solid", color="#000000"];
+        #main__process_documents -> chatgpt_client__ChatGPTClient [style="solid", color="#000000"];
+        main__process_documents -> deepseek_client__DeepSeekClient__analyze_medical_report [style="solid", color="#000000"];
+        main__process_documents -> chatgpt_client__ChatGPTClient__close [style="solid", color="#000000"];
+        main__process_documents -> chatgpt_client__ChatGPTClient____init__ [style="solid", color="#000000"];
+        main__process_documents -> chatgpt_client__ChatGPTClient__analyze_medical_report [style="solid", color="#000000"];
+        processor__DocumentProcessor -> processor__DocumentProcessor__create [style="solid", color="#000000"];
+        main__main -> main__process_documents [style="solid", color="#000000"];
+        predict_image__predict_image -> predict_image__extract_features [style="solid", color="#000000"];
+        #processor -> gigachat_client__GigaChatClient [style="solid", color="#000000"];
+        #processor -> utils [style="solid", color="#000000"];
+        #processor -> deepseek_client__DeepSeekClient [style="solid", color="#000000"];
+        #processor -> predict_image [style="solid", color="#000000"];
+        #processor -> chatgpt_client__ChatGPTClient [style="solid", color="#000000"];
+        #processor__DocumentProcessor____init__ -> gigachat_client__GigaChatClient____init__ [style="solid", color="#000000"];
+        #rocessor__DocumentProcessor____init__ -> deepseek_client__DeepSeekClient___check_api_availability [style="solid", color="#000000"];
+        #processor__DocumentProcessor____init__ -> gigachat_client__GigaChatClient [style="solid", color="#000000"];
+        processor__DocumentProcessor____init__ -> processor__DocumentProcessor___load_medical_terms [style="solid", color="#000000"];
+        #processor__DocumentProcessor____init__ -> deepseek_client__DeepSeekClient____init__ [style="solid", color="#000000"];
+        processor__DocumentProcessor____init__ -> processor__DocumentProcessor___load_surnames [style="solid", color="#000000"];
+        #processor__DocumentProcessor____init__ -> deepseek_client__DeepSeekClient [style="solid", color="#000000"];
+        processor__DocumentProcessor____init__ -> processor__DocumentProcessor___load_cities [style="solid", color="#000000"];
+        processor__DocumentProcessor___load_surnames -> processor__transliterate [style="solid", color="#000000"];
+        processor__DocumentProcessor__create -> processor__DocumentProcessor____init__ [style="solid", color="#000000"];
+        processor__DocumentProcessor__process_document -> predict_image__predict_image [style="solid", color="#000000"];
+        processor__DocumentProcessor__process_document -> processor__DocumentProcessor___cleanup_temp_files [style="solid", color="#000000"];
+        processor__DocumentProcessor__process_document -> utils__get_poppler_path [style="solid", color="#000000"];
+        processor__DocumentProcessor__process_document -> processor__DocumentProcessor___process_single_page [style="solid", color="#000000"];
+        processor__DocumentProcessor__process_document -> processor__DocumentProcessor___analyze_multiple_files [style="solid", color="#000000"];
+        processor__DocumentProcessor___process_single_page -> processor__DocumentProcessor___is_allowed_word [style="solid", color="#000000"];
+        processor__DocumentProcessor___process_single_page -> processor__DocumentProcessor___recognize_text [style="solid", color="#000000"];
+        processor__DocumentProcessor___process_single_page -> processor__DocumentProcessor___is_numeric_personal_data [style="solid", color="#000000"];
+        #processor__DocumentProcessor___analyze_multiple_files -> chatgpt_client__ChatGPTClient [style="solid", color="#000000"];
+        processor__DocumentProcessor___is_allowed_word -> processor__DocumentProcessor___is_numeric_personal_data [style="solid", color="#000000"];
+        processor__DocumentProcessor___is_allowed_word -> processor__transliterate [style="solid", color="#000000"];
+        rotate_images -> rotate_images__main [style="solid", color="#000000"];
+        rotate_images__worker -> rotate_images__correct_image_rotation [style="solid", color="#000000"];
+        rotate_images__main -> rotate_images__worker [style="solid", color="#000000"];
+        train_model -> train_model__extract_features [style="solid", color="#000000"];
+        
+        processor__DocumentProcessor___analyze_multiple_files -> deepseek_client__DeepSeekClient [style="solid", color="#000000"];
+        processor__DocumentProcessor___analyze_multiple_files -> chatgpt_client__ChatGPTClient [style="solid", color="#000000"];
+        processor__DocumentProcessor___analyze_multiple_files -> gigachat_client__GigaChatClient [style="solid", color="#000000"];
+        
+        #processor__DocumentProcessor___analyze_multiple_files -> deepseek_client__DeepSeekClient__analyze_multiple_medical_reports [style="solid", color="#000000"];
+        #processor__DocumentProcessor___analyze_multiple_files -> gigachat_client__GigaChatClient__analyze_multiple_medical_reports [style="solid", color="#000000"];
+        #processor__DocumentProcessor___analyze_multiple_files -> chatgpt_client__ChatGPTClient__analyze_multiple_medical_reports [style="solid", color="#000000"];
+    }

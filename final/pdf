@@ -1,0 +1,19 @@
+#Chat GPT
+
+TOTAL: 104/140 74.3%
+PLUS:  59/78  75.6%
+MINUS: 27/37  73.0%
+IDK:   18/25  72.0%
+FALSE_PLUS:  7/78  9.0%
+FALSE_MINUS: 18/37  48.6%
+FALSE_IDK:   11/25  44.0%
+
+GOOD_WORK:        45/140  32.1%
+BAD_ERROR:        18/103  17.5%
+COEF:             54.5%
+MINUS_PRECISION:  27/45  60.0%
+USELESS_WORK:     18/95  18.9%
+
+PLUS:  59/78 (13 ушло в MINUS, 6 ушло в IDK)
+MINUS: 27/37 (5 ушло в PLUS, 5 ушло в IDK)
+IDK:   18/25 (2 ушло в PLUS, 5 ушло в MINUS)

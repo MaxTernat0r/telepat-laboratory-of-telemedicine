@@ -1,0 +1,37 @@
+#Chat GPT
+TOTAL: 103/150 68.7%
+PLUS:  38/63  60.3%
+MINUS: 11/31  35.5%
+IDK:   54/56  96.4%
+FALSE_PLUS:  4/63  6.3%
+FALSE_MINUS: 9/31  29.0%
+FALSE_IDK:   34/56  60.7%
+
+GOOD_WORK:        20/150  13.3%
+BAD_ERROR:        9/119  7.6%
+COEF:             57.1%
+MINUS_PRECISION:  11/20  55.0%
+USELESS_WORK:     38/130  29.2%
+
+PLUS:  38/63 (8 ушло в MINUS, 17 ушло в IDK)
+MINUS: 11/31 (3 ушло в PLUS, 17 ушло в IDK)
+IDK:   54/56 (1 ушло в PLUS, 1 ушло в MINUS)
+
+#GigaChat
+TOTAL: 104/150 69.3%
+PLUS:  40/63  63.5%
+MINUS: 13/31  41.9%
+IDK:   51/56  91.1%
+FALSE_PLUS:  8/63  12.7%
+FALSE_MINUS: 13/31  41.9%
+FALSE_IDK:   25/56  44.6%
+
+GOOD_WORK:        26/150  17.3%
+BAD_ERROR:        13/119  10.9%
+COEF:             63.0%
+MINUS_PRECISION:  13/26  50.0%
+USELESS_WORK:     33/124  26.6%
+
+PLUS:  40/63 (11 ушло в MINUS, 12 ушло в IDK)
+MINUS: 13/31 (5 ушло в PLUS, 13 ушло в IDK)
+IDK:   51/56 (3 ушло в PLUS, 2 ушло в MINUS)

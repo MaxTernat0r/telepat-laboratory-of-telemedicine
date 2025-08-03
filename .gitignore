@@ -1,0 +1,17 @@
+venv
+.venv
+input
+output
+.env
+env
+*.db
+__pycache__/
+*.pyc
+gigachat_config.txt
+chat-gpt_config.txt
+logs
+ai-result/
+temp_pdf_images
+data
+export_jpg
+export_pdf

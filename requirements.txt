@@ -1,0 +1,44 @@
+# Основные зависимости для обработки документов
+natasha==1.6.0
+pytesseract==0.3.10
+Pillow==10.2.0
+numpy==1.24.3
+pandas<1.5.0
+opencv-python==4.8.1.78
+pdf2image==1.17.0
+
+# AI и машинное обучение
+torch==2.1.0
+torchvision==0.16.0
+scikit-learn==1.3.0
+joblib==1.3.2
+rapidfuzz==3.5.2
+
+# HTTP клиенты и API
+requests==2.31.0
+aiohttp==3.9.3
+aiohttp-socks==0.8.4
+httpx==0.25.2
+
+# Работа с изображениями и PDF
+poppler-utils==23.11.0
+
+# Логирование и конфигурация
+loguru==0.7.2
+python-dotenv==1.0.1
+
+# База данных (если используется)
+SQLAlchemy==2.0.27
+psycopg2-binary==2.9.9
+
+# Тестирование
+pytest==7.4.4
+pytest-cov==4.1.0
+
+# Дополнительные утилиты
+tqdm==4.66.1
+keyboard==0.13.5
+pywin32==306
+
+# Работа с номерами телефонов
+phonenumbers==8.13.25 
